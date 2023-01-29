@@ -4,6 +4,7 @@ export type TableProps<Type> = {
   title: string,
   columns: Type,
   rowsData: Type[],
+  onDelete: (id: string) => void,
 };
 
 type RowData = {
@@ -73,9 +74,28 @@ private initializeHead = () => {
       const cellsHtmlStr = Object.keys(columns).map((key) => `<td>${rowData[key]}</td>`).join(' ');
 
       rowHtmlElement.innerHTML = cellsHtmlStr;
+
+      this.createActions(rowHtmlElement, rowData.id);
+
       return rowHtmlElement;
     });
     this.tbody.append(...rowsHtmlElements);
+  };
+
+  private createActions = (rowHtmlElement: HTMLTableRowElement, id: string): void => {
+    const { onDelete } = this.props;
+
+    const buttonCell = document.createElement('td');
+
+    const deleteButton = document.createElement('button');
+    deleteButton.type = 'button';
+    deleteButton.innerHTML = '<i class="fa-regular fa-trash"></i>';
+    deleteButton.className = 'btn btn-danger';
+    deleteButton.addEventListener('click', () => onDelete(id));
+    deleteButton.style.width = '50px';
+
+    buttonCell.append(deleteButton);
+    rowHtmlElement.append(buttonCell);
   };
 
   private renderView = (): void => {
