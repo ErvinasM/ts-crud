@@ -23,7 +23,7 @@ class App {
     const carTable = new Table({
       title: 'List of vehicles',
       columns: {
-        id: 'ID',
+        id: 'Identification',
         brand: 'Brand',
         model: 'Model',
         price: 'Price',
