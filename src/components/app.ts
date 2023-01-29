@@ -34,6 +34,7 @@ class App {
         year: 'Year',
       },
       rowsData: this.carsCollection.allCars.map(stringifyProps),
+      onDelete: this.handleCarDelete,
     });
 
     this.brandSelect = new SelectField({
@@ -50,6 +51,12 @@ class App {
 
   private handleBrandChange = (brandId: string): void => {
     this.selectedBrandId = brandId;
+    this.update();
+  };
+
+  private handleCarDelete = (carId: string): void => {
+    this.carsCollection.deleteCarById(carId);
+
     this.update();
   };
 
