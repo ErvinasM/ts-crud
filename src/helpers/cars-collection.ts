@@ -22,7 +22,7 @@ class CarsCollection {
             return { ...car, brand: (carBrand && carBrand.title) ?? 'undefined', model: (carModel && carModel.title) ?? 'undefined' };
         };
 
-    public get all(): CarJoined[] {
+    public get allCars(): CarJoined[] {
             return this.props.cars.map(this.joinCar);
         }
 }
