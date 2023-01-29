@@ -1,4 +1,8 @@
-const brands = [{
+const brands = [
+{
+    id: '0',
+    title: 'All brands',
+}, {
   id: '1',
   title: 'Opel',
 }, {
