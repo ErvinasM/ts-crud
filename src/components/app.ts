@@ -21,7 +21,7 @@ class App {
 
   public initialize = (): void => {
     const carTable = new Table({
-      title: 'Car list',
+      title: 'List of vehicles',
       columns: {
         id: 'ID',
         brand: 'Brand',
