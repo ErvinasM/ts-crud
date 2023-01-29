@@ -1,6 +1,6 @@
-type StringifyObjectProps<Type extends Object> = {
-    [Key in keyof Type]: string
-  };
+export type StringifyObjectProps<Type extends Object> = {
+  [Key in keyof Type]: string;
+};
 
   const stringifyProps = <Type extends Object>(object: Type): StringifyObjectProps<Type> => {
     const objectLikeArray = Object.entries(object);
