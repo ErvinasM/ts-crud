@@ -28,7 +28,7 @@ class Table<Type extends RowData> {
   }
 
 private initializeHead = () => {
-    const {title, columns} = this.props;
+    const { title, columns } = this.props;
 
     const headersArrays = Object.values(columns);
     const headersRowHtmlStr = headersArrays.map((header) => `<th>${header}</th>`).join('');
@@ -42,7 +42,7 @@ private initializeHead = () => {
   };
 
   private initializeTbody = () => {
-    const {rowsData, columns} = this.props;
+    const { rowsData, columns } = this.props;
 
     this.tbody.innerHTML = '';
     const rowsHtmlElements = rowsData.map((rowData) => {
@@ -60,8 +60,8 @@ private initializeHead = () => {
     this.initializeHead();
     this.initializeTbody();
 
-    this.htmlElement.className = 'table table-dark table-striped';
-    this.htmlElement.append(this.thead,this.tbody);
+    this.htmlElement.className = 'table table-striped table-bordered rounded rounded-3 overflow-hidden';
+    this.htmlElement.append(this.thead, this.tbody);
    };
 }
 
