@@ -36,6 +36,10 @@ class CarsCollection {
 
         return bCars;
     };
+
+    public deleteCarById = (carId: string): void => {
+        this.props.cars = this.props.cars.filter((car) => car.id !== carId);
+      };
 }
 
 export default CarsCollection;
