@@ -78,6 +78,10 @@ private initializeHead = () => {
     this.tbody.append(...rowsHtmlElements);
   };
 
+  private renderView = (): void => {
+    this.initialize();
+  };
+
    private initialize = (): void => {
     this.initializeHead();
     this.initializeTbody();
@@ -85,6 +89,11 @@ private initializeHead = () => {
     this.htmlElement.className = 'table table-striped table-bordered rounded rounded-3 overflow-hidden';
     this.htmlElement.append(this.thead, this.tbody);
    };
+
+  public updateProps = (newProps: Partial<TableProps<Type>>): void => {
+    this.props = { ...this.props, ...newProps };
+    this.renderView();
+  };
 }
 
 export default Table;

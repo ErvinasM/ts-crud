@@ -25,6 +25,15 @@ class CarsCollection {
     public get allCars(): CarJoined[] {
             return this.props.cars.map(this.joinCar);
         }
+
+    public getByBrandId = (brandId: string): CarJoined[] => {
+        const { cars, models } = this.props;
+        const bModelsIds = models.filter((model) => model.brandId === brandId)
+        .map((model) => model.id);
+        const bCars = cars.filter((car) => bModelsIds.includes(car.modelId)).map(this.joinCar);
+
+        return bCars;
+    };
 }
 
 export default CarsCollection;
