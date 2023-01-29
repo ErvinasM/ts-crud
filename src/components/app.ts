@@ -2,13 +2,15 @@ import cars from '../data/cars';
 import brands from '../data/brands';
 import models from '../data/models';
 import CarsCollection from '../helpers/cars-collection';
+import Table from './table';
+import stringifyProps from '../helpers/stringify-object';
 
 class App {
   private htmlElement: HTMLElement;
 
   private carsCollection: CarsCollection;
 
-  constructor(selector: string) {
+  public constructor(selector: string) {
     const foundElement = document.querySelector<HTMLElement>(selector);
     this.carsCollection = new CarsCollection({ cars, brands, models });
 
@@ -17,11 +19,21 @@ class App {
     this.htmlElement = foundElement;
   }
 
-  initialize = (): void => {
+  public initialize = (): void => {
+    const carTable = new Table({
+      title: 'Car list',
+      columns: {
+        id: 'ID',
+        brand: 'Brand',
+        model: 'Model',
+        price: 'Price',
+        year: 'Year',
+      },
+      rowsData: this.carsCollection.allCars.map(stringifyProps),
+    });
     const container = document.createElement('div');
-    container.className = 'container my-5';
-    container.innerHTML = 'Laukiu kol būsiu sukurtas';
-
+    container.className = 'container my-3';
+    container.appendChild(carTable.htmlElement);
     this.htmlElement.append(container);
   };
 }
