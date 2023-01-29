@@ -30,7 +30,9 @@ class CarsCollection {
         const { cars, models } = this.props;
         const bModelsIds = models.filter((model) => model.brandId === brandId)
         .map((model) => model.id);
-        const bCars = cars.filter((car) => bModelsIds.includes(car.modelId)).map(this.joinCar);
+        let bCars = cars.filter((car) => bModelsIds.includes(car.modelId)).map(this.joinCar);
+
+        if (brandId === '0') { bCars = cars.map(this.joinCar); }
 
         return bCars;
     };
