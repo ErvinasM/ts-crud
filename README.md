@@ -1,72 +1,43 @@
-# TypeScript - CRUD užduotis 1
+## TypeScript CRUD Application
 
-## Užduoties tikslas
+This application allows users to perform various functions related to vehicles such as adding, filtering, editing, and deleting.
 
-Atvaizduoti duomenis HTML lentele, pagal esybių schemą.
+### Features & Functions
 
-### Failų struktūra
-* __components/__ - aplankas skirtas komponentams - klasėms, kurios naudojamos atvaizduoti elementams DOM'e
+- **Adding:** Users can add new vehicles to the database with information like make, model, year, etc.
+- **Filtering:** Users can filter the list of vehicles based on different criteria such as make, model, year, etc.
+- **Editing:** Users can edit the information of existing vehicles in the database.
+- **Deleting:** Users can delete vehicles from the database.
 
-* __data/__ - duomenų failai
+![Alt text](/functionality.gif "Features and usage")
 
-* __helpers/__ - Pagalibinės funkcijos ir klasės, skirtos kodo švarinimui ir perpanaudojimui
+### Technical details
 
-* __types/__ - bendrai naudojami tipai
+The application is built with TypeScript, making it strongly typed and scalable, and utilizes a database to store the information about the vehicles.
 
-### Esybių ryšių diagrama (entity relation diagram).
-![](./car-entity-relation-diagram.png)
+### Requirements
 
-## Darbo atlikimo eiga 
+- **[Node.js](https://nodejs.org/en/)** *(v15 or higher)*
+- **[Typescript](https://www.typescriptlang.org/)** *(v4 or higher)* - support for better code maintainability and scalability
+- **[Eslint](https://eslint.org/)** *(with TypeScript plugin)* - for linting and code quality checks
+- **[Webpack](https://webpack.js.org/)** *(v5 or higher)* - for bundling and optimization
 
-1. Aplanke __./types__ duoti tipų 'griaučiai'. Implementuokite tipus pagal schemą. __car-joined.ts__ tipas turi turėti tokias savybes:
-   * id: string
-   * price: number
-   * year: number
-   * brand: string
-   * model: string
+### Getting Started
 
-2. __./helpers/cars-collection.ts__ 
-   1. Sukurkite konstruktorių, kuris priimtų markes, mašinas ir modelius. Gautus duomenis išsaugokite objekte
-   2. Sukurkite privatų metodą __joinCar__ kuris apjungtų vieną mašiną
-   3. Sukurkite metodą, kurį iškvietus gautumėte visas apjungtas mašinas.
-
-3. __./components/app.ts__
-   1. Sukurkite savybes:
-      1. private htmlElement: HTMLElement;
-      2. private carsCollection: CarsCollection;
-   2. Sukurkite konstruktorių, kuris
-      1.  priimtų selektorių ir pagal jį rastą elementą priskirtų į __htmlElement__ savybę. 
-      2.  sukurtų pradinį __carsCollection__ objektą
-   3. Sukurkite metodą __initialize__, kuriame būtų atliekami komponento atvaizdavimo veiksmai
-
-4. __./components/table.ts__ 
-   1. Sukurkite tipą TableProps<Type>:
-      1. title: string
-      2. columns: Type
-      3. rowsData: Type[]
-   2. Sukurkite savybes:
-      1. public htmlElement: HTMLTableElement;
-      2. private props: TableProps<Type>;
-      3. private tbody: HTMLTableSectionElement;
-      4. private thead: HTMLTableSectionElement;
-   3. Sukurkite konstruktorių, kuris:
-      1. sukurtų pradinius htmlElement, thead ir tbody elementus
-      2. iškviestų metodą __initialize__
-   4. Sukurtite metodą __initialize__, kuriame:
-      1. atliktumete lentelės antraštės atvaizdavimą
-      2. atliktumetė lentelės duomenų eilučių atvaizdavimą
-      3. apjungtumėte elementus
-
-5. __./components/app.ts__
-   1. papildykite __initialize__ metodą, jog būtų įterpiama lentelė
-
-## Rezultato pavyzdys
-![](./result.png)
-
-## Papildomai
-  * Sukurkite lentelės duomenų patikrinimo funkciją, kuri tikrintų duomenų sutapimą su  antraštės stulpeliais
-  * Kodo dalis, kurios gali būti perpanaudotos iškelkite į atskiras funkcijas aplanke __helpers__
-
-
-## Atsakymai
-   * GaliTE peržiūrėti sprendimą aplanke __./atsakymas__
+1. Clone the repository
+```
+$ git clone https://github.com/ErvinasM/ts-crud.git
+```
+2. Install dependencies
+```
+$ npm install
+```
+3. Build the application
+```
+$ npm run build
+```
+4. Start the application
+```
+$ npm start
+```
+5. Visit [http://localhost:3000](http://localhost:3000) in your browser
