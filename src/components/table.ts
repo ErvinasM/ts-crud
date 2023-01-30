@@ -4,7 +4,9 @@ export type TableProps<Type> = {
   title: string,
   columns: Type,
   rowsData: Type[],
+  editedCarId: string | null,
   onDelete: (id: string) => void,
+  onEdit: (id: string) => void,
 };
 
 type RowData = {
@@ -65,11 +67,13 @@ private initializeHead = () => {
   };
 
   private initializeTbody = () => {
-    const { rowsData, columns } = this.props;
+    const { rowsData, columns, editedCarId } = this.props;
 
     this.tbody.innerHTML = '';
     const rowsHtmlElements = rowsData.map((rowData) => {
-      const rowHtmlElement = document.createElement('tr');
+    const rowHtmlElement = document.createElement('tr');
+
+    if (editedCarId === rowData.id) { rowHtmlElement.style.backgroundColor = '#f9ffa3'; }
 
       const cellsHtmlStr = Object.keys(columns).map((key) => `<td>${rowData[key]}</td>`).join(' ');
 
@@ -83,9 +87,17 @@ private initializeHead = () => {
   };
 
   private createActions = (rowHtmlElement: HTMLTableRowElement, id: string): void => {
-    const { onDelete } = this.props;
+    const { onDelete, onEdit, editedCarId } = this.props;
 
     const buttonCell = document.createElement('td');
+
+    const isCancelButton = editedCarId === id;
+    const editButton = document.createElement('button');
+    editButton.type = 'button';
+    editButton.innerHTML = isCancelButton ? '<i class="fa-regular fa-xmark"></i>' : '<i class="fa-regular fa-pen-to-square"></i>';
+    editButton.className = `btn btn-${isCancelButton ? 'dark' : 'warning'}`;
+    editButton.style.width = '50px';
+    editButton.addEventListener('click', () => onEdit(id));
 
     const deleteButton = document.createElement('button');
     deleteButton.type = 'button';
@@ -94,7 +106,7 @@ private initializeHead = () => {
     deleteButton.addEventListener('click', () => onDelete(id));
     deleteButton.style.width = '50px';
 
-    buttonCell.append(deleteButton);
+    buttonCell.append(editButton, deleteButton);
     rowHtmlElement.append(buttonCell);
   };
 

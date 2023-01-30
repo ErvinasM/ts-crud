@@ -21,9 +21,12 @@ class App {
 
   private carForm: CarForm;
 
+  private editedCarId: string | null;
+
   public constructor(selector: string) {
     const foundElement = document.querySelector<HTMLElement>(selector);
     this.carsCollection = new CarsCollection({ cars, brands, models });
+    this.editedCarId = null;
 
     if (foundElement === null) throw new Error(`There is no element with chosen selector '${selector}'`);
 
@@ -38,6 +41,8 @@ class App {
       },
       rowsData: this.carsCollection.allCars.map(stringifyProps),
       onDelete: this.handleCarDelete,
+      onEdit: this.handleCarEdit,
+      editedCarId: this.editedCarId,
     });
 
     this.brandSelect = new SelectField({
@@ -67,7 +72,8 @@ class App {
   }
 
   private handleBrandChange = (brandId: string): void => {
-    this.selectedBrandId = brandId;
+    const brand = brands.find((b) => b.id === brandId);
+    this.selectedBrandId = brand ? brandId : null;
     this.update();
   };
 
@@ -88,6 +94,16 @@ class App {
     };
 
     this.carsCollection.add(carProps);
+
+    this.update();
+  };
+
+  private handleCarEdit = (carId: string) => {
+    if (this.editedCarId === carId) {
+      this.editedCarId = null;
+    } else {
+      this.editedCarId = carId;
+    }
 
     this.update();
   };
