@@ -60,9 +60,9 @@ private initializeHead = () => {
 
     this.thead.innerHTML = `
     <tr>
-      <th colspan="${headersArrays.length}" class="text-center h3">${title}</th>
+      <th colspan="${headersArrays.length + 1}" class="text-center h5">${title}</th>
     </tr>
-    <tr>${headersRowHtmlStr}</tr>
+    <tr>${headersRowHtmlStr}<th>Actions</th></tr>
     `;
   };
 
@@ -90,6 +90,7 @@ private initializeHead = () => {
     const { onDelete, onEdit, editedCarId } = this.props;
 
     const buttonCell = document.createElement('td');
+    buttonCell.className = 'd-flex gap-2';
 
     const isCancelButton = editedCarId === id;
     const editButton = document.createElement('button');

@@ -191,13 +191,17 @@ class App {
 
   initialize = (): void => {
     const container = document.createElement('div');
-    container.className = 'container d-flex flex-row my-3';
+    container.className = 'd-flex flex-row gap-4 p-5';
 
     const createContainer = document.createElement('div');
-    createContainer.className = 'd-flex align-items-start';
+    createContainer.className = '';
     createContainer.append(this.carForm.htmlElement);
 
-    container.append(this.brandSelect.htmlElement, this.carTable.htmlElement, createContainer);
+    const rightContainer = document.createElement('div');
+    rightContainer.className = 'd-flex flex-column gap-4 w-50';
+
+    rightContainer.append(this.brandSelect.htmlElement, createContainer);
+    container.append(this.carTable.htmlElement, rightContainer);
 
     this.htmlElement.append(container);
   };

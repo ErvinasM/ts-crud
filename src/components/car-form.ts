@@ -42,7 +42,7 @@ class CarForm {
     this.props = props;
     this.htmlElement = document.createElement('form');
     this.htmlFieldsContainer = document.createElement('div');
-    this.htmlFormHeader = document.createElement('h3');
+    this.htmlFormHeader = document.createElement('h5');
     this.htmlSubmitBtn = document.createElement('button');
 
     this.fields = {
@@ -71,7 +71,7 @@ class CarForm {
   }
 
   private initialize = (): void => {
-    this.htmlFormHeader.className = 'h3 text-center';
+    this.htmlFormHeader.className = 'h5 text-center';
 
     const fieldsArr = Object.values(this.fields);
     this.htmlFieldsContainer.className = 'd-flex flex-column gap-2';
