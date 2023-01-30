@@ -63,6 +63,33 @@ class CarsCollection {
 
         cars.push(newCar);
       };
+
+      public update = (carId: string, { brandId, modelId, ...props }: CarProps) => {
+        const { cars, models, brands } = this.props;
+
+        const updatedCarIndex = cars.findIndex((c) => c.id === carId);
+        if (updatedCarIndex === -1) {
+          throw new Error(`Klaida: nerastas mašinos id: '${carId}'`);
+        }
+
+        const model = models.find((m) => m.id === modelId);
+        if (!model) {
+          throw new Error(`Klaida: nerastas mašinos modelio id: '${modelId}'`);
+        }
+
+        const brand = brands.find((b) => b.id === brandId);
+        if (!brand) {
+          throw new Error(`Klaida: nerastas mašinos markės id: '${brandId}'`);
+        }
+
+        const updatedCar: Car = {
+          ...cars[updatedCarIndex],
+          ...props,
+          modelId,
+        };
+
+        this.props.cars.splice(updatedCarIndex, 1, updatedCar);
+      };
 }
 
 export default CarsCollection;
