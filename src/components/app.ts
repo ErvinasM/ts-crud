@@ -43,7 +43,7 @@ class App {
     this.brandSelect = new SelectField({
       labelText: 'Selected brand:',
       onChange: this.handleBrandChange,
-      options: brands.map(({ id, title }) => ({ title, value: id })),
+      options: [{ title: 'All', value: '0' }, ...brands.map(({ id, title }) => ({ title, value: id }))],
     });
 
     const originBID = brands[0].id;
@@ -54,8 +54,8 @@ class App {
       values: {
         brand: originBID,
         model: models.filter((m) => m.brandId === originBID)[0].id,
-        price: '0',
-        year: '2000',
+        price: '',
+        year: '',
       },
       onSubmit: this.handleCreateCar,
     });

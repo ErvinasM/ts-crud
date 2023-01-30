@@ -1,8 +1,5 @@
 const brands = [
-{
-    id: '0',
-    title: 'All',
-}, {
+ {
   id: '1',
   title: 'Opel',
 }, {
