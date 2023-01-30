@@ -6,7 +6,7 @@ type OptionType = {
 export type SelectFieldProps = {
   labelText: string;
   onChange?: (newValue: string) => void;
-  options: Array<OptionType>;
+  options: OptionType[];
   name?: string;
   value?: string;
 };

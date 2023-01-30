@@ -1,11 +1,12 @@
 import cars from '../data/cars';
 import brands from '../data/brands';
 import models from '../data/models';
-import CarsCollection from '../helpers/cars-collection';
+import CarsCollection, { CarProps } from '../helpers/cars-collection';
 import Table from './table';
 import stringifyProps, { StringifyObjectProps } from '../helpers/stringify-object';
 import CarJoined from '../types/car-joined';
 import SelectField from './select-field';
+import CarForm, { Values } from './car-form';
 
 class App {
   private htmlElement: HTMLElement;
@@ -17,6 +18,8 @@ class App {
   private brandSelect: SelectField;
 
   private carTable: Table<StringifyObjectProps<CarJoined>>;
+
+  private carForm: CarForm;
 
   public constructor(selector: string) {
     const foundElement = document.querySelector<HTMLElement>(selector);
@@ -43,6 +46,20 @@ class App {
       options: brands.map(({ id, title }) => ({ title, value: id })),
     });
 
+    const originBID = brands[0].id;
+
+    this.carForm = new CarForm({
+      title: 'Add new vehicle',
+      submitBtnText: 'Add',
+      values: {
+        brand: originBID,
+        model: models.filter((m) => m.brandId === originBID)[0].id,
+        price: '0',
+        year: '2000',
+      },
+      onSubmit: this.handleCreateCar,
+    });
+
     this.selectedBrandId = null;
     this.htmlElement = foundElement;
 
@@ -56,6 +73,21 @@ class App {
 
   private handleCarDelete = (carId: string): void => {
     this.carsCollection.deleteCarById(carId);
+
+    this.update();
+  };
+
+  private handleCreateCar = ({
+ brand, model, price, year,
+}: Values): void => {
+    const carProps: CarProps = {
+      brandId: brand,
+      modelId: model,
+      price: Number(price),
+      year: Number(year),
+    };
+
+    this.carsCollection.add(carProps);
 
     this.update();
   };
@@ -80,8 +112,13 @@ class App {
 
   initialize = (): void => {
     const container = document.createElement('div');
-    container.className = 'container my-3';
-    container.append(this.brandSelect.htmlElement, this.carTable.htmlElement);
+    container.className = 'container d-flex flex-row my-3';
+
+    const createContainer = document.createElement('div');
+    createContainer.className = 'd-flex align-items-start';
+    createContainer.append(this.carForm.htmlElement);
+
+    container.append(this.brandSelect.htmlElement, this.carTable.htmlElement, createContainer);
 
     this.htmlElement.append(container);
   };
