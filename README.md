@@ -4,8 +4,8 @@ This application allows users to perform various functions related to vehicles s
 
 ### Features & Functions
 
-- **Adding:** Users can add new vehicles to the database with information like make, model, year, etc.
-- **Filtering:** Users can filter the list of vehicles based on different criteria such as make, model, year, etc.
+- **Adding:** Users can add new vehicles to the database with information like brand, model, year, etc.
+- **Filtering:** Users can filter the list of vehicles based on different criteria such as brand, model, year, etc.
 - **Editing:** Users can edit the information of existing vehicles in the database.
 - **Deleting:** Users can delete vehicles from the database.
 
